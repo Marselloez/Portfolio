@@ -118,6 +118,12 @@
   box-shadow: inset 0 0 10px #000000aa;
   line-height: 1.4;
   overflow-x: auto; 
+min-width: max-content;
+}
+.nowrap-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  height: 100%;
 }
     .comment { color: #6a9955; font-style: italic; }
     .keyword { color: #569cd6; font-weight: 600; }
@@ -968,8 +974,10 @@ if (currentMain === 'sql') {
 
   if (fixedWidthBlocks.includes(currentSub)) {
     contentArea.innerHTML = `
+<div class="nowrap-wrapper">
       <h2>${currentSub}</h2>
       <div class="nowrap-block">${content}</div>
+</div>
     `;
   } else {
     contentArea.innerHTML = `
@@ -1017,4 +1025,4 @@ if (currentMain === 'sql') {
 </script>
 
 </body>
-</html>                                        
+</html>                         
