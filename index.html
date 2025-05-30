@@ -99,7 +99,7 @@
       background-color: #252526;
       padding: 20px;
       border-radius: 8px;
-      white-space: pre;
+      white-space: pre-wrap;
       font-family: Consolas, monospace;
       font-size: 0.95rem;
       color: #d4d4d4;
@@ -107,6 +107,18 @@
       line-height: 1.4;
       overflow-x: auto;
     }
+.nowrap-block {
+  background-color: #252526;
+  padding: 20px;
+  border-radius: 8px;
+  white-space: pre; 
+  font-family: Consolas, monospace;
+  font-size: 0.95rem;
+  color: #d4d4d4;
+  box-shadow: inset 0 0 10px #000000aa;
+  line-height: 1.4;
+  overflow-x: auto; 
+}
     .comment { color: #6a9955; font-style: italic; }
     .keyword { color: #569cd6; font-weight: 600; }
     .identifier { color: #9cdcfe; }
@@ -952,10 +964,19 @@ if (currentMain === 'sql') {
   `;
 } else if (currentMain === 'actqa') {
   const content = actqaDocs[currentSub] || "<p class='comment'>Раздел в разработке...</p>";
-  contentArea.innerHTML = `
-    <h2>${currentSub}</h2>
-    <pre>${content}</pre>
-  `;
+  const fixedWidthBlocks = ['Чек-лист', 'Тест-кейсы', 'Результаты теста'];
+
+  if (fixedWidthBlocks.includes(currentSub)) {
+    contentArea.innerHTML = `
+      <h2>${currentSub}</h2>
+      <div class="nowrap-block">${content}</div>
+    `;
+  } else {
+    contentArea.innerHTML = `
+      <h2>${currentSub}</h2>
+      <div>${content}</div>
+    `;
+  }
 } else if (currentMain === 'other') {
   const content = otherDocs[currentSub] || "<p class='comment'>Раздел в разработке...</p>";
   contentArea.innerHTML = `
@@ -996,4 +1017,4 @@ if (currentMain === 'sql') {
 </script>
 
 </body>
-</html>                                   
+</html>                                        
